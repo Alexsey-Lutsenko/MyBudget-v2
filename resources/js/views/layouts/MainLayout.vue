@@ -3,8 +3,7 @@
         <router-view></router-view>
     </div>
     <div class="mt-auto footer-menu">
-        <hr class="m-0" />
-        <ul class="navbar-nav flex-row footer-menu-position my-2">
+        <ul class="navbar-nav flex-row my-2">
             <li class="nav-item">
                 <router-link class="nav-link icon-footer-menu" :to="'/'">
                     <div class="d-flex justify-content-center">
@@ -14,19 +13,19 @@
                 </router-link>
             </li>
             <li class="nav-item">
+                <router-link class="nav-link icon-footer-menu" :to="'/graph'">
+                    <div class="d-flex justify-content-center">
+                        <font-awesome-icon icon="fa-solid fa-chart-line" />
+                    </div>
+                    <div>Итог</div>
+                </router-link>
+            </li>
+            <li class="nav-item">
                 <router-link class="nav-link icon-footer-menu" :to="'/category'">
                     <div class="d-flex justify-content-center">
                         <font-awesome-icon icon="fa-solid fa-apple-whole" />
                     </div>
                     <div>Категории</div>
-                </router-link>
-            </li>
-            <li class="nav-item">
-                <router-link class="nav-link icon-footer-menu" :to="'/settings'">
-                    <div class="d-flex justify-content-center">
-                        <font-awesome-icon icon="fa-solid fa-gear" />
-                    </div>
-                    <div>Настройки</div>
                 </router-link>
             </li>
             <li class="nav-item">
@@ -49,6 +48,10 @@ export default {};
 .footer-menu {
     position: absolute;
     bottom: 0;
+    width: 100%;
+    background-color: #f2f2f2;
+    display: flex;
+    justify-content: center;
 }
 .icon-footer-menu {
     margin: 0 10px;

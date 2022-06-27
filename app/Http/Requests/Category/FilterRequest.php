@@ -2,11 +2,9 @@
 
 namespace App\Http\Requests\Category;
 
-use Illuminate\Support\Facades\Request;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
-class StoreRequest extends FormRequest
+class FilterRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,12 +24,6 @@ class StoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'category' => [
-                'required',
-                'string',
-                'max:255',
-                Rule::unique('categories')->where('user_id', Request::input('user_id')),
-            ],
             'user_id' => 'required|numeric'
         ];
     }

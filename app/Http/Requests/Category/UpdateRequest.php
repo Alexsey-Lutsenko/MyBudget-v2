@@ -24,8 +24,8 @@ class UpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'category' => 'required|string|max:255',
-            'priority' => 'required|numeric'
+            'user_id' => 'required|numeric',
+            'motion' => 'in:up,down'
         ];
     }
 }

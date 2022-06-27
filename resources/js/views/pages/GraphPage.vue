@@ -1,5 +1,5 @@
 <template>
-    <h1>Settings page</h1>
+    <h1>Graph page</h1>
 </template>
 
 <script>

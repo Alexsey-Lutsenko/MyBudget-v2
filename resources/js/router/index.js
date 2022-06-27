@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 
 import MainPage from "../views/pages/MainPage";
 import CategoryPage from "../views/pages/CategoryPage";
-import SettingsPage from "../views/pages/SettingsPage";
+import graphPage from "../views/pages/GraphPage";
 import RegistrationPage from "../views/pages/auth/RegistrationPage";
 import LoginPage from "../views/pages/auth/LoginPage";
 
@@ -26,9 +26,9 @@ const routes = [
         },
     },
     {
-        path: "/settings",
-        name: "settings-page",
-        component: SettingsPage,
+        path: "/graph",
+        name: "graph-page",
+        component: graphPage,
         meta: {
             layout: "main",
             auth: true,
