@@ -1,16 +1,10 @@
 import { createRouter, createWebHistory } from "vue-router";
 
-import MainPage from "../views/pages/MainPage";
-import CategoryPage from "../views/pages/CategoryPage";
-import graphPage from "../views/pages/GraphPage";
-import RegistrationPage from "../views/pages/auth/RegistrationPage";
-import LoginPage from "../views/pages/auth/LoginPage";
-
 const routes = [
     {
         path: "/",
-        name: "main-page",
-        component: MainPage,
+        name: "main.page",
+        component: () => import("../views/pages/MainPage"),
         meta: {
             layout: "main",
             auth: true,
@@ -18,8 +12,8 @@ const routes = [
     },
     {
         path: "/category",
-        name: "category-page",
-        component: CategoryPage,
+        name: "category.page",
+        component: () => import("../views/pages/CategoryPage"),
         meta: {
             layout: "main",
             auth: true,
@@ -27,8 +21,8 @@ const routes = [
     },
     {
         path: "/graph",
-        name: "graph-page",
-        component: graphPage,
+        name: "graph.page",
+        component: () => import("../views/pages/GraphPage"),
         meta: {
             layout: "main",
             auth: true,
@@ -36,20 +30,30 @@ const routes = [
     },
     {
         path: "/registration",
-        name: "registration-page",
-        component: RegistrationPage,
+        name: "registration.page",
+        component: () => import("../views/pages/auth/RegistrationPage"),
         meta: {
             layout: "auth",
-            auth: true,
+            auth: false,
         },
     },
     {
         path: "/login",
-        name: "login-page",
-        component: LoginPage,
+        name: "login.page",
+        component: () => import("../views/pages/auth/LoginPage"),
         meta: {
             layout: "auth",
             auth: false,
+        },
+    },
+    ,
+    {
+        path: "/:notFound(.*)",
+        name: "404.page",
+        component: () => import("../views/pages/NotFoundPage"),
+        meta: {
+            layout: "main",
+            auth: true,
         },
     },
 ];
@@ -62,6 +66,24 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
+    const token = localStorage.getItem("x_xsrf_token");
+
+    if (!token) {
+        if (to.meta.auth) {
+            return next({ name: "login.page" });
+        } else {
+            return next();
+        }
+    }
+
+    if (token) {
+        if (to.meta.auth) {
+            return next();
+        } else {
+            return next({ name: "main.page" });
+        }
+    }
+
     next();
 });
 

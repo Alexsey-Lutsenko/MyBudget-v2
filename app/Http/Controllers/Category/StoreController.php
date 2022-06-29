@@ -12,9 +12,11 @@ class StoreController extends BaseController
     {
         $data = $request->validated();
 
-        $maxCategoriesPriority = Category::where('user_id', $data['user_id'])->max('priority');
+        $user = auth()->user();
 
-        $category = $this->service->store($data, $maxCategoriesPriority);
+        $maxCategoriesPriority = Category::where('user_id', $user->id)->max('priority');
+
+        $category = $this->service->store($data, $maxCategoriesPriority, $user);
 
         return new CategoryResource($category);
     }

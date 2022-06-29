@@ -11,13 +11,16 @@ use Illuminate\Http\Request;
 
 class IndexController extends Controller
 {
-    public function __invoke(FilterRequest $request)
+    public function __invoke()
     {
-        $data = $request->validated();
+        $user = auth()->user();
 
-        $filter = app()->make(CategoryFilter::class, ['queryParams' => array_filter($data)]);
+//        dd($user->id);
 
-        $categories = Category::filter($filter)->oldest('priority')->get();
+//        $filter = app()->make(CategoryFilter::class, ['queryParams' => array_filter($data)]);
+//        $categories = Category::filter($filter)->oldest('priority')->get();
+
+        $categories = Category::where('user_id', $user->id)->oldest('priority')->get();
 
         return CategoryResource::collection($categories);
     }

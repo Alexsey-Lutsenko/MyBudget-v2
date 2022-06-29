@@ -31,8 +31,7 @@ class StoreRequest extends FormRequest
                 'string',
                 'max:255',
                 Rule::unique('categories')->where('user_id', Request::input('user_id')),
-            ],
-            'user_id' => 'required|numeric'
+            ]
         ];
     }
 }

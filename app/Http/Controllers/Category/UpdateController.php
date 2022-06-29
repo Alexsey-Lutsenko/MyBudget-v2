@@ -15,7 +15,9 @@ class UpdateController extends BaseController
     {
         $data = $request->validated();
 
-        $categoryUpdated = $this->service->update($category, $data);
+        $user = auth()->user();
+
+        $categoryUpdated = $this->service->update($category, $data, $user);
 
         return new CategoryResource($categoryUpdated);
     }

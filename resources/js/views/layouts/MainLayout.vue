@@ -29,19 +29,28 @@
                 </router-link>
             </li>
             <li class="nav-item">
-                <router-link class="nav-link icon-footer-menu" :to="'/login'">
+                <button class="btn" @click.prevent="logout">
                     <div class="d-flex justify-content-center">
                         <font-awesome-icon icon="fa-solid fa-arrow-right-from-bracket" />
                     </div>
                     <div>Выход</div>
-                </router-link>
+                </button>
             </li>
         </ul>
     </div>
 </template>
 
 <script>
-export default {};
+export default {
+    methods: {
+        logout() {
+            axios.post("/logout").then((res) => {
+                localStorage.removeItem("x_xsrf_token");
+                this.$router.push({ name: "login.page" });
+            });
+        },
+    },
+};
 </script>
 
 <style lang="scss" scoped>

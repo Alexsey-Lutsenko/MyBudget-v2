@@ -31,17 +31,17 @@
                 <tr v-for="(category, idx) in categories">
                     <td>{{ category.category }}</td>
                     <td>
-                        <button class="btn p-0" @click="updateMotion(category.id, 'up')">
+                        <button class="custom-btn btn p-0" @click="updateMotion(category.id, 'up')">
                             <font-awesome-icon icon="fa-solid fa-arrow-up" v-if="idx !== 0" />
                         </button>
                     </td>
                     <td>
-                        <button class="btn p-0" @click="updateMotion(category.id, 'down')">
+                        <button class="custom-btn btn p-0" @click="updateMotion(category.id, 'down')">
                             <font-awesome-icon icon="fa-solid fa-arrow-down" v-if="idx !== maxCategoryPriority" />
                         </button>
                     </td>
                     <td>
-                        <button class="button-delete-category btn p-0" @click="deleteCategory(category.id)">
+                        <button class="custom-btn button-delete-category btn p-0" @click="deleteCategory(category.id)">
                             <font-awesome-icon icon="fa-solid fa-trash" />
                         </button>
                     </td>
@@ -69,7 +69,7 @@ export default {
     methods: {
         async getAllCategories() {
             this.loading = true;
-            await this.$store.dispatch("category/index", { user_id: this.user_id });
+            await this.$store.dispatch("category/index");
             this.loading = false;
         },
 
@@ -83,22 +83,18 @@ export default {
             }
 
             this.loading = true;
-            await this.$store.dispatch("category/store", { category: this.newCategory, user_id: this.user_id });
+            await this.$store.dispatch("category/store", { category: this.newCategory });
             this.loading = false;
 
             this.newCategory = "";
         },
 
         async updateMotion(id, motion) {
-            this.loading = true;
-            await this.$store.dispatch("category/update", { id: id, user_id: this.user_id, motion: motion });
-            this.loading = false;
+            await this.$store.dispatch("category/update", { id: id, motion: motion });
         },
 
         async deleteCategory(id) {
-            this.loading = true;
-            await this.$store.dispatch("category/destroy", { id: id, user_id: this.user_id });
-            this.loading = false;
+            await this.$store.dispatch("category/destroy", { id: id });
         },
     },
     computed: {
@@ -139,6 +135,9 @@ export default {
 .button-delete-category {
     color: red;
     font-size: 16px;
+}
+.custom-btn:focus {
+    box-shadow: none;
 }
 table td {
     padding: 5px;

@@ -24,7 +24,6 @@ class UpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_id' => 'required|numeric',
             'motion' => 'in:up,down'
         ];
     }

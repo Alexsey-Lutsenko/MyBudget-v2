@@ -18,9 +18,13 @@ use Illuminate\Support\Facades\Route;
 //    return $request->user();
 //});
 
-Route::group(['prefix' => 'categories'], function () {
-   Route::get('/', App\Http\Controllers\Category\IndexController::class);
-   Route::post('/', App\Http\Controllers\Category\StoreController::class);
-   Route::patch('/{category}', App\Http\Controllers\Category\UpdateController::class);
-   Route::delete('/{category}', App\Http\Controllers\Category\DestroyController::class);
+Route::group(['middleware' => 'auth:sanctum'], function () {
+    Route::group(['prefix' => 'categories'], function () {
+        Route::get('/', App\Http\Controllers\Category\IndexController::class);
+        Route::post('/', App\Http\Controllers\Category\StoreController::class);
+        Route::patch('/{category}', App\Http\Controllers\Category\UpdateController::class);
+        Route::delete('/{category}', App\Http\Controllers\Category\DestroyController::class);
+    });
 });
+
+//Route::get('/send', App\Http\Controllers\MailController::class);

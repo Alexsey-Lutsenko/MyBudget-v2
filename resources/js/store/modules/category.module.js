@@ -23,9 +23,9 @@ export default {
         },
     },
     actions: {
-        async index({ commit }, payload) {
+        async index({ commit }) {
             try {
-                await axios.get("/api/categories", { params: payload }).then((res) => {
+                await axios.get("/api/categories").then((res) => {
                     commit("addCategories", res.data.data);
                 });
             } catch (e) {
@@ -36,7 +36,7 @@ export default {
         async store({ commit, dispatch }, payload) {
             try {
                 await axios.post("/api/categories", payload);
-                await dispatch("index", { user_id: payload.user_id });
+                await dispatch("index");
                 commit("remuveError");
             } catch (e) {
                 commit("addErrors", errorHandler(e));
@@ -45,8 +45,8 @@ export default {
 
         async update({ commit, dispatch }, payload) {
             try {
-                await axios.patch(`/api/categories/${payload.id}`, { motion: payload.motion, user_id: payload.user_id });
-                await dispatch("index", { user_id: payload.user_id });
+                await axios.patch(`/api/categories/${payload.id}`, { motion: payload.motion });
+                await dispatch("index");
                 commit("remuveError");
             } catch (e) {
                 commit("addErrors", errorHandler(e));
@@ -56,7 +56,7 @@ export default {
         async destroy({ commit, dispatch }, payload) {
             try {
                 await axios.delete(`/api/categories/${payload.id}`);
-                await dispatch("index", { user_id: payload.user_id });
+                await dispatch("index");
                 commit("remuveError");
             } catch (e) {
                 commit("addErrors", errorHandler(e));
