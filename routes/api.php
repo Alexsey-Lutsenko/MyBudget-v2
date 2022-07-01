@@ -25,6 +25,18 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         Route::patch('/{category}', App\Http\Controllers\Category\UpdateController::class);
         Route::delete('/{category}', App\Http\Controllers\Category\DestroyController::class);
     });
+
+    Route::group(['prefix' => 'incomes'], function () {
+        Route::get('/', App\Http\Controllers\Income\IndexController::class);
+        Route::post('/', App\Http\Controllers\Income\StoreController::class);
+        Route::delete('/{income}', App\Http\Controllers\Income\DestroyController::class);
+    });
+
+    Route::group(['prefix' => 'incomes'], function () {
+        Route::get('/', App\Http\Controllers\Income\IndexController::class);
+        Route::post('/', App\Http\Controllers\Income\StoreController::class);
+        Route::delete('/{income}', App\Http\Controllers\Income\DestroyController::class);
+    });
 });
 
 //Route::get('/send', App\Http\Controllers\MailController::class);

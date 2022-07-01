@@ -28,7 +28,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="(category, idx) in categories">
+                <tr v-for="(category, idx) in categories" :key="category.id">
                     <td>{{ category.category }}</td>
                     <td>
                         <button class="custom-btn btn p-0" @click="updateMotion(category.id, 'up')">

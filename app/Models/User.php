@@ -22,4 +22,14 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Category::class, 'user_id', 'id');
     }
+
+    public function incomes()
+    {
+        return $this->belongsToMany(Income::class, 'user_id', 'id');
+    }
+
+    public function costs()
+    {
+        return $this->belongsToMany(Cost::class, 'user_id', 'id');
+    }
 }
